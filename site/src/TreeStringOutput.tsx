@@ -24,17 +24,12 @@ const StyledOutputDisplay = styled.button`
   border-radius: 4px;
   text-align: left;
   width: 100%;
-  transition: all 0.2s;
   &:hover {
     background: ${theme.colors.gray[200]};
     cursor: pointer;
-    transform: translate(-2px, -2px);
-    box-shadow: 3px 3px 5px grey;
   }
   &:active {
-    background: ${theme.colors.gray[100]};
-    transform: translate(0, 0);
-    box-shadow: 1px 1px 5px grey;
+    background: ${theme.colors.gray[300]};
   }
 `;
 

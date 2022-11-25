@@ -1,8 +1,7 @@
-import Editor from "@monaco-editor/react";
-import { editor } from "monaco-editor";
 import styled from "@emotion/styled";
+import CodeMirror from "@uiw/react-codemirror";
+
 import { FloatingActionButton } from "./FloatingActionButton";
-import { useRef } from "react";
 
 const ExampleYaml = `my-project:
 - src:
@@ -34,12 +33,6 @@ interface Props {
 }
 
 export function YamlInput(props: Props) {
-  const editorRef = useRef<editor.IStandaloneCodeEditor>();
-
-  function onEditorMount(editor: editor.IStandaloneCodeEditor) {
-    editorRef.current = editor;
-  }
-
   function onChange(value: string | undefined) {
     props.onChange(value ?? "");
   }
@@ -50,22 +43,7 @@ export function YamlInput(props: Props) {
   }
   return (
     <StyledYamlInputContainer>
-      {/* <Editor
-        defaultLanguage="yaml"
-        options={{
-          tabSize: 2,
-          minimap: {
-            enabled: false,
-          },
-          scrollBeyondLastLine: false,
-        }}
-        onChange={onChange}
-        onMount={onEditorMount}
-      /> */}
-      <StyledTextArea
-        value={props.value}
-        onChange={(e) => onChange(e.target.value)}
-      ></StyledTextArea>
+      <CodeMirror value={props.value} onChange={onChange} />
       <FloatingActionButton onClick={loadExample}>
         Load example
       </FloatingActionButton>
