@@ -1,9 +1,12 @@
+default:
+  image: node:16-alpine
+
 pages:
   stage: deploy
   script:
-    - cd site
-    - npm install
-    - npm run build
+    - npm --prefix site install
+    - npm --prefix site run build
+    - mv ./site/dist ./public
   artifacts:
     paths:
       - dist
