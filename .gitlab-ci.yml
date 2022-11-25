@@ -4,11 +4,12 @@ default:
 pages:
   stage: deploy
   script:
-    - npm --prefix site install
-    - npm --prefix site run build
-    - mv ./site/dist ./public
+    - cd site
+    - npm install
+    - npm run build -- --base=/to-tree-string
+    - mv ./dist ../public
   artifacts:
     paths:
-      - dist
+      - public
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
