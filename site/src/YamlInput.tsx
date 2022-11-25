@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import CodeMirror from "@uiw/react-codemirror";
+import { StreamLanguage } from "@codemirror/language";
+import { yaml } from "@codemirror/legacy-modes/mode/yaml";
 
 import { FloatingActionButton } from "./FloatingActionButton";
 
@@ -21,12 +23,6 @@ const StyledYamlInputContainer = styled.div`
   padding: 1rem;
 `;
 
-const StyledTextArea = styled.textarea`
-  width: 100%;
-  height: 100%;
-  font-family: monospace;
-`;
-
 interface Props {
   onChange(input: string): void;
   value: string;
@@ -38,12 +34,15 @@ export function YamlInput(props: Props) {
   }
 
   function loadExample() {
-    // editorRef.current?.setValue(ExampleYaml);
     props.onChange(ExampleYaml);
   }
   return (
     <StyledYamlInputContainer>
-      <CodeMirror value={props.value} onChange={onChange} />
+      <CodeMirror
+        value={props.value}
+        onChange={onChange}
+        extensions={[StreamLanguage.define(yaml)]}
+      />
       <FloatingActionButton onClick={loadExample}>
         Load example
       </FloatingActionButton>
