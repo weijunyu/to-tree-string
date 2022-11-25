@@ -81,4 +81,78 @@ describe("lib tests", function () {
 
     expect(processNode(input)).toBe(want);
   });
+
+  it("can full tree 1", function () {
+    const input: TreeNode = {
+      src: [
+        {
+          images: [
+            "image-01.jpg",
+            "image-02.jpg",
+            {
+              compressed: ["01.jpg", "02.jpg"],
+            },
+          ],
+        },
+        {
+          templates: ["page.html", "post.html"],
+        },
+        "index.html",
+      ],
+    };
+    const want = `src
+├── images
+│   ├── image-01.jpg
+│   ├── image-02.jpg
+│   └── compressed
+│       ├── 01.jpg
+│       └── 02.jpg
+├── templates
+│   ├── page.html
+│   └── post.html
+└── index.html`;
+
+    expect(processNode(input)).toBe(want);
+  });
+  it("can full tree 2", function () {
+    const input: TreeNode = {
+      "my-project": [
+        {
+          src: [
+            {
+              images: [
+                "image-01.jpg",
+                "image-02.jpg",
+                {
+                  compressed: ["01.jpg", "02.jpg"],
+                },
+              ],
+            },
+            {
+              templates: ["page.html", "post.html"],
+            },
+            "index.html",
+          ],
+        },
+        "package.json",
+        "README.md",
+      ],
+    };
+    const want = `my-project
+├── src
+│   ├── images
+│       ├── image-01.jpg
+│       ├── image-02.jpg
+│       └── compressed
+│           ├── 01.jpg
+│           └── 02.jpg
+│   ├── templates
+│       ├── page.html
+│       └── post.html
+│   └── index.html
+├── package.json
+└── README.md`;
+
+    expect(processNode(input)).toBe(want);
+  });
 });
