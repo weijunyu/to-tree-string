@@ -26,7 +26,8 @@ my-project:
 */
 export function processNode(
   input: TreeNode | string,
-  level: number = 0
+  level: number = 0,
+  hasNextSibling: boolean = false
 ): string {
   if (typeof input === "string") {
     return input;
@@ -34,7 +35,9 @@ export function processNode(
   let output = "";
   for (const key of Object.keys(input)) {
     const value = input[key];
-    const padding = "".padStart(level * 4, " ");
+    const padding = hasNextSibling
+      ? EmptyNodePrefix.padEnd(level * 4, " ")
+      : "".padEnd(level * 4, " ");
 
     output += key + "\n";
 
@@ -45,9 +48,14 @@ export function processNode(
       )}\n`;
     } else {
       for (let i = 0; i < value.length; i++) {
-        const prefix =
-          i === value.length - 1 ? LastNodePrefix : MiddleNodePrefix;
-        output += `${padding}${prefix} ${processNode(value[i], level + 1)}\n`;
+        const isLast = i === value.length - 1;
+        const prefix = isLast ? LastNodePrefix : MiddleNodePrefix;
+
+        output += `${padding}${prefix} ${processNode(
+          value[i],
+          level + 1,
+          !isLast
+        )}\n`;
       }
     }
   }
