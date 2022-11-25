@@ -4,6 +4,8 @@ Generate [`tree`](<https://en.wikipedia.org/wiki/Tree_(command)>)-style output f
 
 Use it to quickly generate a string representation of a file tree.
 
+Try it at https://junyuwei.gitlab.io/to-tree-string/.
+
 ## Usage
 
 ```typescript

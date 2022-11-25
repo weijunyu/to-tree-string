@@ -4,18 +4,7 @@ import { StreamLanguage } from "@codemirror/language";
 import { yaml } from "@codemirror/legacy-modes/mode/yaml";
 
 import { FloatingActionButton } from "./FloatingActionButton";
-
-const ExampleYaml = `my-project:
-- src:
-  - images:
-    - image-01.jpg
-    - image-02.jpg
-  - templates:
-    - page.html
-    - post.html
-  - index.html
-- package.json
-- README.md`;
+import { ExampleYaml } from "./constants";
 
 const StyledYamlInputContainer = styled.div`
   height: 100%;

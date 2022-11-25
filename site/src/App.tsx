@@ -1,8 +1,10 @@
 import { useCallback, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+
 import { YamlInput } from "./YamlInput";
 import { TreeStringOutput } from "./TreeStringOutput";
+import { ExampleYaml } from "./constants";
 
 const StyledTabs = styled(Tabs)`
   height: 100%;
@@ -20,7 +22,7 @@ const StyledTabPanel = styled(TabPanel)`
 `;
 
 function App() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(ExampleYaml);
   const [inputToTransform, setInputToTransform] = useState("");
 
   const onDisplayTreeString = useCallback(() => {
