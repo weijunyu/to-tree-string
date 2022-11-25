@@ -15,6 +15,7 @@ const StyledTabPanels = styled(TabPanels)`
 `;
 
 const StyledTabPanel = styled(TabPanel)`
+  padding: 0;
   height: 100%;
 `;
 
@@ -28,7 +29,7 @@ function App() {
 
   return (
     <main style={{ height: "100vh" }}>
-      <StyledTabs isFitted variant="unstyled">
+      <StyledTabs isFitted>
         <StyledTabPanels>
           <StyledTabPanel>
             <YamlInput onChange={(input: string) => setInput(input)} />
@@ -39,13 +40,8 @@ function App() {
         </StyledTabPanels>
 
         <TabList>
-          <Tab _selected={{ background: "lightgrey" }}>YAML</Tab>
-          <Tab
-            _selected={{ background: "lightgrey" }}
-            onClick={onDisplayTreeString}
-          >
-            Tree String
-          </Tab>
+          <Tab>YAML</Tab>
+          <Tab onClick={onDisplayTreeString}>Tree String</Tab>
         </TabList>
       </StyledTabs>
     </main>
