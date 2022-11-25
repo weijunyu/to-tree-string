@@ -1,7 +1,7 @@
 {
-  "name": "to-tree-string",
+  "name": "@jywei/to-tree-string",
   "version": "0.0.1",
-  "description": "Represent a JS hierarchy object",
+  "description": "Print a filesystem tree string",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -16,5 +16,13 @@
     "jest": "^28.1.0",
     "ts-jest": "^28.0.4",
     "typescript": "^4.7.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/junyuwei/to-tree-string.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/junyuwei/to-tree-string/issues"
+  },
+  "homepage": "https://gitlab.com/junyuwei/to-tree-string#readme"
 }
