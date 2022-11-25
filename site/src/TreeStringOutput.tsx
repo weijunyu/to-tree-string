@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { parse } from "yaml";
 import styled from "@emotion/styled";
 import { CopyIcon } from "@chakra-ui/icons";
+import { theme } from "@chakra-ui/theme";
 
 import { FloatingActionButton } from "./FloatingActionButton";
 
@@ -14,6 +15,14 @@ const StyledOutputContainer = styled.div`
   padding: 1rem;
   height: 100%;
   position: relative;
+`;
+
+const StyledOutputDisplay = styled.pre`
+  padding: 1rem;
+  &:hover {
+    background: ${theme.colors.gray[200]};
+    cursor: pointer;
+  }
 `;
 
 function getTreeStringOutput(yamlString: string): string {
@@ -49,7 +58,8 @@ export function TreeStringOutput(props: Props) {
 
   return (
     <StyledOutputContainer>
-      <pre>{outputStr}</pre>
+      <StyledOutputDisplay>{outputStr}</StyledOutputDisplay>
+
       <FloatingActionButton onClick={copyTreeString}>
         <CopyIcon />
         &nbsp;Copy
