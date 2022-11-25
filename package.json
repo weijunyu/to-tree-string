@@ -1,6 +1,6 @@
 {
   "name": "@jywei/to-tree-string",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Print a filesystem tree string",
   "main": "build/main.js",
   "files": [
