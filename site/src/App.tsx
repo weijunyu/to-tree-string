@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { YamlInput } from "./YamlInput";
@@ -20,27 +20,32 @@ const StyledTabPanel = styled(TabPanel)`
 
 function App() {
   const [input, setInput] = useState("");
-  const [parseInput, setParseInput] = useState("");
+  const [inputToTransform, setInputToTransform] = useState("");
+
+  const onDisplayTreeString = useCallback(() => {
+    setInputToTransform(input);
+  }, [input]);
 
   return (
     <main style={{ height: "100vh" }}>
-      <StyledTabs
-        isFitted
-        variant="unstyled"
-        onChange={() => setParseInput(input)}
-      >
+      <StyledTabs isFitted variant="unstyled">
         <StyledTabPanels>
           <StyledTabPanel>
             <YamlInput onChange={(input: string) => setInput(input)} />
           </StyledTabPanel>
           <StyledTabPanel>
-            <TreeStringOutput yamlString={parseInput} />
+            <TreeStringOutput yamlString={inputToTransform} />
           </StyledTabPanel>
         </StyledTabPanels>
 
         <TabList>
           <Tab _selected={{ background: "lightgrey" }}>YAML</Tab>
-          <Tab _selected={{ background: "lightgrey" }}>Tree String</Tab>
+          <Tab
+            _selected={{ background: "lightgrey" }}
+            onClick={onDisplayTreeString}
+          >
+            Tree String
+          </Tab>
         </TabList>
       </StyledTabs>
     </main>

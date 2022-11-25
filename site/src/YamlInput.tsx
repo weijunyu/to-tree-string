@@ -10,6 +10,7 @@ export function YamlInput(props: Props) {
     <Editor
       defaultLanguage="yaml"
       options={{
+        tabSize: 2,
         minimap: {
           enabled: false,
         },
