@@ -4,60 +4,39 @@ const LastNodePrefix = "└──";
 const MiddleNodePrefix = "├──";
 const EmptyNodePrefix = "│";
 
-/*
-  images:
-    01.jpg
-    02.jpg
-
-my-project:
-  - src:
-    - images:
-      - image-01.jpg
-      - image-02.jpg
-      - compressed:
-        - 01.jpg
-        - 02.jpg
-    - templates:
-      - page.html
-      - post.html
-    - index.html
-  - package.json
-  - README.md
-*/
-export function processNode(
-  input: TreeNode | string,
-  level: number = 0,
-  hasNextSibling: boolean = false
-): string {
+export function processNode(input: TreeNode | string): string[] {
   if (typeof input === "string") {
-    return input;
+    return [input];
   }
-  let output = "";
+  let output: string[] = [];
   for (const key of Object.keys(input)) {
-    const value = input[key];
-    const padding = hasNextSibling
-      ? EmptyNodePrefix.padEnd(level * 4, " ")
-      : "".padEnd(level * 4, " ");
+    output.push(key);
+    const children = input[key];
 
-    output += key + "\n";
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i];
 
-    if (value.length === 1) {
-      output += `${padding}${LastNodePrefix} ${processNode(
-        value[0],
-        level + 1
-      )}\n`;
-    } else {
-      for (let i = 0; i < value.length; i++) {
-        const isLast = i === value.length - 1;
-        const prefix = isLast ? LastNodePrefix : MiddleNodePrefix;
+      const isLast = i === children.length - 1;
+      const prefix = isLast ? LastNodePrefix : MiddleNodePrefix;
 
-        output += `${padding}${prefix} ${processNode(
-          value[i],
-          level + 1,
-          !isLast
-        )}\n`;
+      if (typeof child === "string") {
+        output.push(`${prefix} ${child}`);
+      } else {
+        const processed = processNode(child);
+        output.push(`${prefix} ${processed[0]}`);
+        for (let i = 1; i < processed.length; i++) {
+          const padding = isLast
+            ? "".padEnd(4, " ")
+            : EmptyNodePrefix.padEnd(4, " ");
+          output.push(padding + processed[i]);
+        }
       }
     }
   }
-  return output.trim();
+  return output;
+}
+
+export function toTreeString(input: TreeNode | string): string {
+  const stringArr = processNode(input);
+  return stringArr.join("\n");
 }

@@ -1,4 +1,4 @@
-import { processNode, TreeNode } from "../lib/toTreeString";
+import { toTreeString, TreeNode } from "../lib/toTreeString";
 
 describe("lib tests", function () {
   it("can produce string for a 1-level node", function () {
@@ -8,11 +8,11 @@ describe("lib tests", function () {
     const want = `images
 ├── image-01.jpg
 └── image-02.jpg`;
-    expect(processNode(input)).toBe(want);
+    expect(toTreeString(input)).toBe(want);
   });
 
   it("can produce string for a 2-level node", function () {
-    const input: TreeNode = {
+    const input = {
       images: [
         "image-01.jpg",
         "image-02.jpg",
@@ -28,11 +28,11 @@ describe("lib tests", function () {
     ├── 01.jpg
     └── 02.jpg`;
 
-    expect(processNode(input)).toBe(want);
+    expect(toTreeString(input)).toBe(want);
   });
 
   it("can produce string for a 3-level node", function () {
-    const input: TreeNode = {
+    const input = {
       images: [
         "image-01.jpg",
         "image-02.jpg",
@@ -57,11 +57,11 @@ describe("lib tests", function () {
         ├── 03.jpg
         └── 04.jpg`;
 
-    expect(processNode(input)).toBe(want);
+    expect(toTreeString(input)).toBe(want);
   });
 
   it("can produce string for a 2-level node, with empty node padding", function () {
-    const input: TreeNode = {
+    const input = {
       images: [
         "image-01.jpg",
         "image-02.jpg",
@@ -79,7 +79,7 @@ describe("lib tests", function () {
 │   └── 02.jpg
 └── hero.jpg`;
 
-    expect(processNode(input)).toBe(want);
+    expect(toTreeString(input)).toBe(want);
   });
 
   it("can full tree 1", function () {
@@ -112,8 +112,9 @@ describe("lib tests", function () {
 │   └── post.html
 └── index.html`;
 
-    expect(processNode(input)).toBe(want);
+    expect(toTreeString(input)).toBe(want);
   });
+
   it("can full tree 2", function () {
     const input: TreeNode = {
       "my-project": [
@@ -141,18 +142,18 @@ describe("lib tests", function () {
     const want = `my-project
 ├── src
 │   ├── images
-│       ├── image-01.jpg
-│       ├── image-02.jpg
-│       └── compressed
-│           ├── 01.jpg
-│           └── 02.jpg
+│   │   ├── image-01.jpg
+│   │   ├── image-02.jpg
+│   │   └── compressed
+│   │       ├── 01.jpg
+│   │       └── 02.jpg
 │   ├── templates
-│       ├── page.html
-│       └── post.html
+│   │   ├── page.html
+│   │   └── post.html
 │   └── index.html
 ├── package.json
 └── README.md`;
 
-    expect(processNode(input)).toBe(want);
+    expect(toTreeString(input)).toBe(want);
   });
 });
