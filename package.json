@@ -23,10 +23,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/junyuwei/to-tree-string.git"
+    "url": "git+ssh://git@github.com/weijunyu/to-tree-string.git"
   },
   "bugs": {
-    "url": "https://gitlab.com/junyuwei/to-tree-string/issues"
+    "url": "https://github.com/weijunyu/to-tree-string/issues"
   },
-  "homepage": "https://gitlab.com/junyuwei/to-tree-string#readme"
+  "homepage": "https://github.com/weijunyu/to-tree-string#readme"
 }

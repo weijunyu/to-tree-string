@@ -1,10 +1,8 @@
 ## Summary
 
-Generate [`tree`](<https://en.wikipedia.org/wiki/Tree_(command)>)-style output from a JSON object assuming a specific YAML structure.
+Generate [`tree`](<https://en.wikipedia.org/wiki/Tree_(command)>)-style output from JSON.
 
 Use it to quickly generate a string representation of a file tree.
-
-Try it at https://junyuwei.gitlab.io/to-tree-string/.
 
 ## Usage
 
@@ -26,8 +24,7 @@ my-project:
   - README.md
 */
 
-// In most cases, you shouldn't have to explicitly set type inputs as TreeNode.
-// Do it if TS has trouble inferring from the declared object and yells at you.
+// Transformed into object (or JSON):
 const input: TreeNode = {
   "my-project": [
     {
