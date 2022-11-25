@@ -1,3 +1,5 @@
+Generate `tree`-like output from a JSON object.
+
 ## Usage
 
 ```typescript
