@@ -1,0 +1,11 @@
+pages:
+  stage: deploy
+  script:
+    - cd site
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
