@@ -32,7 +32,10 @@ function App() {
       <StyledTabs isFitted>
         <StyledTabPanels>
           <StyledTabPanel>
-            <YamlInput onChange={(input: string) => setInput(input)} />
+            <YamlInput
+              value={input}
+              onChange={(input: string) => setInput(input)}
+            />
           </StyledTabPanel>
           <StyledTabPanel>
             <TreeStringOutput yamlString={inputToTransform} />

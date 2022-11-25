@@ -19,10 +19,18 @@ const ExampleYaml = `my-project:
 const StyledYamlInputContainer = styled.div`
   height: 100%;
   position: relative;
+  padding: 1rem;
+`;
+
+const StyledTextArea = styled.textarea`
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
 `;
 
 interface Props {
   onChange(input: string): void;
+  value: string;
 }
 
 export function YamlInput(props: Props) {
@@ -37,12 +45,12 @@ export function YamlInput(props: Props) {
   }
 
   function loadExample() {
-    editorRef.current?.setValue(ExampleYaml);
-    // props.onChange(ExampleYaml);
+    // editorRef.current?.setValue(ExampleYaml);
+    props.onChange(ExampleYaml);
   }
   return (
     <StyledYamlInputContainer>
-      <Editor
+      {/* <Editor
         defaultLanguage="yaml"
         options={{
           tabSize: 2,
@@ -53,7 +61,11 @@ export function YamlInput(props: Props) {
         }}
         onChange={onChange}
         onMount={onEditorMount}
-      />
+      /> */}
+      <StyledTextArea
+        value={props.value}
+        onChange={(e) => onChange(e.target.value)}
+      ></StyledTextArea>
       <FloatingActionButton onClick={loadExample}>
         Load example
       </FloatingActionButton>
