@@ -1,7 +1,7 @@
 {
   "name": "to-tree-string",
   "version": "0.0.1",
-  "description": "",
+  "description": "Represent a JS hierarchy object",
   "main": "index.js",
   "scripts": {
     "test": "jest",

@@ -156,4 +156,37 @@ describe("lib tests", function () {
 
     expect(toTreeString(input)).toBe(want);
   });
+
+  it("can full tree 3", function () {
+    const input: TreeNode = {
+      "my-project": [
+        {
+          src: [
+            {
+              images: ["image-01.jpg", "image-02.jpg"],
+            },
+            {
+              templates: ["page.html", "post.html"],
+            },
+            "index.html",
+          ],
+        },
+        "package.json",
+        "README.md",
+      ],
+    };
+    const want = `my-project
+├── src
+│   ├── images
+│   │   ├── image-01.jpg
+│   │   └── image-02.jpg
+│   ├── templates
+│   │   ├── page.html
+│   │   └── post.html
+│   └── index.html
+├── package.json
+└── README.md`;
+
+    expect(toTreeString(input)).toBe(want);
+  });
 });
