@@ -6,6 +6,7 @@ import { CopyIcon } from "@chakra-ui/icons";
 import { theme } from "@chakra-ui/theme";
 
 import { FloatingActionButton } from "./FloatingActionButton";
+import { useToast } from "@chakra-ui/react";
 
 interface Props {
   yamlString: string;
@@ -17,11 +18,23 @@ const StyledOutputContainer = styled.div`
   position: relative;
 `;
 
-const StyledOutputDisplay = styled.pre`
+const StyledOutputDisplay = styled.button`
   padding: 1rem;
+  background: ${theme.colors.gray[100]};
+  border-radius: 4px;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s;
   &:hover {
     background: ${theme.colors.gray[200]};
     cursor: pointer;
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 5px grey;
+  }
+  &:active {
+    background: ${theme.colors.gray[100]};
+    transform: translate(0, 0);
+    box-shadow: 1px 1px 5px grey;
   }
 `;
 
@@ -48,9 +61,18 @@ export function TreeStringOutput(props: Props) {
     [props.yamlString]
   );
 
+  const toast = useToast();
+
   function copyTreeString() {
     navigator.clipboard
       .writeText(outputStr)
+      .then(() => {
+        toast({
+          title: "Copied",
+          duration: 3000,
+          isClosable: true,
+        });
+      })
       .catch((err: any) =>
         console.error("couldn't copy tree string: " + err.message)
       );
@@ -58,7 +80,9 @@ export function TreeStringOutput(props: Props) {
 
   return (
     <StyledOutputContainer>
-      <StyledOutputDisplay>{outputStr}</StyledOutputDisplay>
+      <StyledOutputDisplay onClick={copyTreeString}>
+        <pre>{outputStr}</pre>
+      </StyledOutputDisplay>
 
       <FloatingActionButton onClick={copyTreeString}>
         <CopyIcon />
