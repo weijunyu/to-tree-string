@@ -1,8 +1,6 @@
 name: Deploy to pages
 
-on:
-  push:
-    branches: [master]
+on: [push]
 
 permissions:
   contents: read
@@ -27,6 +25,7 @@ jobs:
           npm build
 
   deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs: build
     environment:
       name: github-pages
