@@ -1,61 +1,57 @@
-## Summary
+# to-tree-string
 
-Generate [`tree`](<https://en.wikipedia.org/wiki/Tree_(command)>)-style output from JSON.
+A TypeScript library that converts indented string representations of file system hierarchies to tree-like string outputs similar to the `tree` command.
 
-Use it to quickly generate a string representation of a file tree.
+## Installation
+
+```bash
+npm install @jywei/to-tree-string
+```
 
 ## Usage
 
 ```typescript
-import { toTreeString, TreeNode } from "to-tree-string";
+import { toTreeString } from "@jywei/to-tree-string";
 
-/*
-Easier to visualize this object in YAML, representing a file tree:
-my-project:
-  - src:
-    - images:
-      - image-01.jpg
-      - image-02.jpg
-    - templates:
-      - page.html
-      - post.html
-    - index.html
-  - package.json
-  - README.md
-*/
-
-// Transformed into object (or JSON):
-const input: TreeNode = {
-  "my-project": [
-    {
-      src: [
-        {
-          images: ["image-01.jpg", "image-02.jpg"],
-        },
-        {
-          templates: ["page.html", "post.html"],
-        },
-        "index.html",
-      ],
-    },
-    "package.json",
-    "README.md",
-  ],
-};
+// Basic example
+const input = `src
+  app
+    index.js
+  public
+    image-01.jpg
+    image-02.jpg
+index.html
+package.json`;
 
 console.log(toTreeString(input));
+```
 
-/*
-my-project
+Output:
+
+```
+.
 ├── src
-│   ├── images
-│   │   ├── image-01.jpg
-│   │   └── image-02.jpg
-│   ├── templates
-│   │   ├── page.html
-│   │   └── post.html
-│   └── index.html
-├── package.json
-└── README.md
-*/
+│   ├── app
+│   │   └── index.js
+│   └── public
+│       ├── image-01.jpg
+│       └── image-02.jpg
+├── index.html
+└── package.json
+```
+
+## Configuration Options
+
+You can customize the behavior using options:
+
+```typescript
+// Using custom indentation size
+const input = `root
+    level1
+        level2
+            file1.txt
+`;
+
+// Specify 4 spaces per indentation level
+console.log(toTreeString(input, { spacesPerIndent: 4 }));
 ```
