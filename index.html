@@ -93,13 +93,36 @@
         if (e.key === "Tab") {
           e.preventDefault();
 
-          const start = this.selectionStart;
-          const end = this.selectionEnd;
+          if (e.shiftKey) {
+            const start = this.selectionStart;
 
-          this.value =
-            this.value.substring(0, start) + "  " + this.value.substring(end);
+            const lineStart = this.value.lastIndexOf("\n", start - 1) + 1;
+            const lineText = this.value.substring(lineStart, start);
 
-          this.selectionStart = this.selectionEnd = start + 2;
+            if (!lineText.startsWith("  ")) {
+              return;
+            }
+
+            // Remove 2 spaces from the beginning of the line
+            this.value =
+              this.value.substring(0, lineStart) +
+              lineText.substring(2) +
+              this.value.substring(start);
+
+            // Adjust cursor position
+            this.selectionStart = this.selectionEnd = Math.max(
+              lineStart,
+              start - 2
+            );
+          } else {
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+
+            this.value =
+              this.value.substring(0, start) + "  " + this.value.substring(end);
+
+            this.selectionStart = this.selectionEnd = start + 2;
+          }
 
           updateOutput();
         }
