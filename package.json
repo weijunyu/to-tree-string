@@ -22,9 +22,21 @@
     "indentation",
     "filesystem"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weijunyu/to-tree-string.git"
+  },
+  "author": {
+    "name": "Wei Junyu",
+    "url": "https://github.com/weijunyu"
+  },
+  "homepage": "https://github.com/weijunyu/to-tree-string",
+  "bugs": {
+    "url": "https://github.com/weijunyu/to-tree-string/issues"
+  },
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.7.3",
+    "typescript": "^5.8.2",
     "vitest": "^3.0.7"
   }
 }
