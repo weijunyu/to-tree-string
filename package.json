@@ -1,6 +1,6 @@
 {
   "name": "@jywei/to-tree-string",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Convert indented string representations to tree-like output similar to the `tree` command",
   "main": "dist/to-tree-string.js",
   "types": "dist/to-tree-string.d.ts",
